@@ -9,6 +9,7 @@ export default memo(function Timer({
   modal,
   handleModal
 }: Props) {
+  console.log(window.globalCount++);
   const [time, setTime] = useState(0);
   const [timerStart, setTimerStart] = useState(false);
   const buttons = [{
@@ -68,21 +69,24 @@ export default memo(function Timer({
             {buttons.map(({
           value,
           display
-        }) => <>
+        }) => {
+          console.log(window.globalCount++);
+          return <>
                 {display == "1h" ? <button className="rounded-full border border-orange-400 px-3 text-orange-400 hover:bg-orange-400/20 transition-all duration-150" onClick={() => {
-            setTimerStart(false);
-            setTime(value);
-            handleModal(prev => !prev);
-          }}>
+              setTimerStart(false);
+              setTime(value);
+              handleModal(prev => !prev);
+            }}>
                     {display}
                   </button> : <button className="rounded-full border border-zinc-100 p-2 text-zinc-100 hover:bg-zinc-400/20 transition-all duration-150 " onClick={() => {
-            setTimerStart(false);
-            setTime(value);
-            handleModal(prev => !prev);
-          }}>
+              setTimerStart(false);
+              setTime(value);
+              handleModal(prev => !prev);
+            }}>
                     {display}
                   </button>}
-              </>)}
+              </>;
+        })}
           </div>
         </div> : null}
     </>;
