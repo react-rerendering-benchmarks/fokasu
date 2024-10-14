@@ -9,7 +9,14 @@ export default memo(function Timer({
   modal,
   handleModal
 }: Props) {
-  console.log(window.globalCount++);
+  useEffect(() => {
+    if (window) {
+      if (window.globalCount === undefined) {
+        window.globalCount = 0;
+      }
+      console.log(window.globalCount++);
+    }
+  }, []);
   const [time, setTime] = useState(0);
   const [timerStart, setTimerStart] = useState(false);
   const buttons = [{
