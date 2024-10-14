@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { AiOutlineGithub } from "react-icons/ai";
 import Timer from "../components/Timer";
 function App() {
-  console.log(window.globalCount++);
+  useEffect(() => {
+    if (window) {
+      if (window.globalCount === undefined) {
+        window.globalCount = 0;
+      }
+      console.log(window.globalCount++);
+    }
+  }, []);
   const [modal, setModal] = useState(false);
   return <div className="bg-zinc-900 h-screen mx-auto flex flex-col items-center backdrop-blur-md">
       <div className="flex relative w-full h-20">
@@ -21,9 +28,3 @@ function App() {
     </div>;
 }
 export default App;
-declare global {
-  interface Window {
-    globalCount: number;
-  }
-}
-window.globalCount = 0;
